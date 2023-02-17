@@ -1,4 +1,5 @@
 exports.isLoggedIn = (req, res, next) => {
+  //!! passport를 통해 로그인 한 경우
   if (req.isAuthenticated()) {
     next();
   } else {

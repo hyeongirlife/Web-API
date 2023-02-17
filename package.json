@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start:dev": "nodemon app.js"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "connect-flash": "^0.1.1",

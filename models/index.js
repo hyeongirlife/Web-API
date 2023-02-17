@@ -35,6 +35,7 @@ fs.readdirSync(__dirname)
       sequelize,
       Sequelize.DataTypes
     );
+    console.log("model", model);
     db[model.name] = model;
   });
 
@@ -47,14 +48,14 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.User = require("./user")(sequelize, Sequelize);
-db.Post = require("./post")(sequelize, Sequelize);
-db.Hashtag = require("./hashtag")(sequelize, Sequelize);
+db.User = require("./User")(sequelize, Sequelize);
+db.Post = require("./Post")(sequelize, Sequelize);
+db.Hashtag = require("./Hashtag")(sequelize, Sequelize);
 
 db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User);
 db.Post.belongsToMany(db.Hashtag, { through: "PostHashtag" });
-db.Hashtag.belongTo(db.Post, { through: "PostHashtag" });
+db.Hashtag.belongsTo(db.Post, { through: "PostHashtag" });
 
 //!! User와 User간 N:M 관계
 db.User.belongsToMany(db.User, {
@@ -67,7 +68,5 @@ db.User.belongsToMany(db.User, {
   as: "Followings",
   through: "Follow",
 });
-
-module.exports = db;
 
 module.exports = db;

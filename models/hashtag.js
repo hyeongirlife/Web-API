@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-  sequelize.define(
-    "user",
+  return sequelize.define(
+    "hashtag",
     {
       title: {
-        type: DataTypes.STRING(140),
+        type: DataTypes.STRING(15),
         allowNull: false,
       },
     },
