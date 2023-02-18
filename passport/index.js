@@ -10,9 +10,18 @@ module.exports = (passport) => {
   //!! 전역 req.user에 passport 정보를 담는다.
   passport.deserializeUser((id, done) => {
     try {
-      User.find({ where: { id } }).then((user) => done(null, user));
+      const user = User.find({
+        where: { id },
+        include: [
+          { model: User, attributes: ["id", "nick"], as: "Followers" },
+          { model: User, attributes: ["id", "nick"], as: "Followings" },
+        ],
+      });
+      done(null, user);
+      return;
     } catch (err) {
-      return done(null, false);
+      done(null, false);
+      return;
     }
   });
   local(passport);
