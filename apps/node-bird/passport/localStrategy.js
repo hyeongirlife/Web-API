@@ -18,10 +18,10 @@ module.exports = (passport) => {
             where: { email },
           });
           if (user) {
-            const result = await bcrypt.compare(password, existUser.password);
+            const result = await bcrypt.compare(password, user.password);
 
             if (result) {
-              done(null, existUser);
+              done(null, user);
             } else {
               done(null, false, { message: "비밀번호가 일치하지 않습니다" });
             }
